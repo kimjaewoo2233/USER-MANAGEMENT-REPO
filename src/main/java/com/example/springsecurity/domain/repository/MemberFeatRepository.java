@@ -5,5 +5,5 @@ import com.example.springsecurity.domain.entity.Member;
 
 public interface MemberFeatRepository {
 
-    public Member memberInfo(String username);
+    public MemberDTO memberInfo(String username);
 }

@@ -24,7 +24,7 @@ public class MemberFeatRepositoryImpl extends QuerydslRepositorySupport implemen
         super(Member.class);
     }
 
-    public Member memberInfo(String username){
+    public MemberDTO memberInfo(String username){
         QMember member = QMember.member;
         QRole role = QRole.role;
         JPQLQuery<Member> query = from(member);
@@ -35,7 +35,7 @@ public class MemberFeatRepositoryImpl extends QuerydslRepositorySupport implemen
                 .where(member.username.eq(username))
                 .fetch().stream().findFirst().get();
 
-        return memberResult;
+        return MemberDTO.toDTO(memberResult);
     }
 
 

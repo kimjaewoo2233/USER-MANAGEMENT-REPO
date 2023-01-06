@@ -31,16 +31,8 @@ public class MemoryUserDetailsService implements UserDetailsService {
 
             log.info("------------------UserDetailsService");
 
-            Member member= memberRepository.findById(username).orElseThrow(() ->
-                    new UsernameNotFoundException("User Name Not found"));
-
-            return  new MemberDTO(member.getUsername(),
-                    member.getPassword(),
-                    member.getMemberRole().stream().map(role ->
-                        new SimpleGrantedAuthority(role.getMemberRole().getRoleString()))
-                            .collect(Collectors.toUnmodifiableSet()),
-                    member.getNickName(),
-                    member.getGender()
-                    );
+        return MemberDTO.toDTO(memberRepository.findById(username)
+                .orElseThrow(() ->
+                new UsernameNotFoundException("User Name Not found")));
     }
 }
