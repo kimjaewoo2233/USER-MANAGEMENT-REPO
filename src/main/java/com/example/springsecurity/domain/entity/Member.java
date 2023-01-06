@@ -3,9 +3,9 @@ package com.example.springsecurity.domain.entity;
 
 import com.example.springsecurity.domain.Gender;
 import com.example.springsecurity.domain.MemberRole;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +28,11 @@ public class Member {
         private Gender gender;
 
         @Builder.Default
-        @ElementCollection
-        private Set<MemberRole> memberRole = new HashSet<>();
+        @OneToMany(fetch = FetchType.LAZY
+                ,mappedBy = "member"
+                ,cascade = CascadeType.ALL
+                ,orphanRemoval = true)
+        private Set<Role> memberRole = new HashSet<>();
+
+        //여기서도 save 가능하지만 id값 때문에 일부로 뺌
 }

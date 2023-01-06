@@ -1,9 +1,6 @@
 package com.example.springsecurity.domain.dto;
 
 import com.example.springsecurity.domain.Gender;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +24,7 @@ public class MemberDTO extends User {
                      String nickName,
                      Gender gender) {
         super(username, password, authorities);
+
     }
 
 

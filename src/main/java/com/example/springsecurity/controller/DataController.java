@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DataController {
 
         @GetMapping("/hello")
-        @PreAuthorize("hasRole('ROLE_USER')")
+        @PreAuthorize("hasRole('ROLE_NORMAL')")
         public String hello(Authentication authentication){
                 System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
                 System.out.println(authentication.getName());
@@ -19,7 +19,7 @@ public class DataController {
         }
 
         @GetMapping("/hello2")
-        @PreAuthorize("hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ROLE_GOLD')")
         public String hello2(){
                 return "\nHello World";
         }

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -35,7 +36,9 @@ public class MemoryUserDetailsService implements UserDetailsService {
 
             return  new MemberDTO(member.getUsername(),
                     member.getPassword(),
-                    List.of(new SimpleGrantedAuthority("ROLE_USER")),
+                    member.getMemberRole().stream().map(role ->
+                        new SimpleGrantedAuthority(role.getMemberRole().getRoleString()))
+                            .collect(Collectors.toUnmodifiableSet()),
                     member.getNickName(),
                     member.getGender()
                     );
