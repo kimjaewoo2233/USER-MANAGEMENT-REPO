@@ -2,7 +2,9 @@ package com.example.springsecurity.controller;
 
 
 import com.example.springsecurity.domain.data.MemberRegisterData;
+import com.example.springsecurity.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberController {
 
-        @PostMapping("/register")
+        private final MemberService memberService;
+
+
+        @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<Boolean> register(
                 @RequestBody MemberRegisterData memberRegisterData){
 
-
-            return ResponseEntity.ok(false);
+            return ResponseEntity.ok(memberService.register(memberRegisterData));
         }
 }
