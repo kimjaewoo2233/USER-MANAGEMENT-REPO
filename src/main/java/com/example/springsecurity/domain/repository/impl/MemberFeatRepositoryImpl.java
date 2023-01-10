@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MemberFeatRepositoryImpl extends QuerydslRepositorySupport implements MemberFeatRepository {
@@ -24,7 +25,7 @@ public class MemberFeatRepositoryImpl extends QuerydslRepositorySupport implemen
         super(Member.class);
     }
 
-    public MemberDTO memberInfo(String username){
+    public Optional<MemberDTO> memberInfo(String username){
         QMember member = QMember.member;
         QRole role = QRole.role;
         JPQLQuery<Member> query = from(member);
@@ -35,7 +36,7 @@ public class MemberFeatRepositoryImpl extends QuerydslRepositorySupport implemen
                 .where(member.username.eq(username))
                 .fetch().stream().findFirst().get();
 
-        return MemberDTO.toDTO(memberResult);
+        return Optional.of(MemberDTO.toDTO(memberResult));
     }
 
 

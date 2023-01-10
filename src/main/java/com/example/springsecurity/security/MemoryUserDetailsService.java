@@ -4,6 +4,7 @@ package com.example.springsecurity.security;
 
 import com.example.springsecurity.domain.dto.MemberDTO;
 import com.example.springsecurity.domain.entity.Member;
+import com.example.springsecurity.domain.repository.MemberFeatRepository;
 import com.example.springsecurity.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +26,13 @@ import java.util.stream.Collectors;
 public class MemoryUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-
+    private final MemberFeatRepository memberFeatRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
             log.info("------------------UserDetailsService");
 
-        return MemberDTO.toDTO(memberRepository.findById(username)
-                .orElseThrow(() ->
-                new UsernameNotFoundException("User Name Not found")));
+        return memberFeatRepository.memberInfo(username).orElseThrow(() ->
+                new UsernameNotFoundException("User not Found"));
     }
 }
