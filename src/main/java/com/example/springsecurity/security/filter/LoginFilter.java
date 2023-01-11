@@ -45,7 +45,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                         valueMap.get("username")
                         ,valueMap.get("password"));
 
-        return getAuthenticationManager().authenticate(token);
+        return getAuthenticationManager().authenticate(token);  //token을 던져주면 DaoAuthenticationProvider가
+        // 비밀번호체크해줌 이 토큰 값과 loadUserBy에서 반환하는 비밀번호와 대조한다.
     }
 
 
