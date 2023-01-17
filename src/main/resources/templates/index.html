@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+        파일 <input type="file" name="files" class="form-control" multiple>
+        <button class="btn">임시저장</button>
+
+        <div class="img">
+
+        </div>
+        <form class="form" method="post" action="/save">
+
+            <input type="submit" value="상품등록" class="product-btn">
+        </form>
+<!--      <script>-->
+<!--          document.querySelector('body').innerHTML = `<img src="/view?fileName=c0e3f16b-4c58-4156-b373-268a2f1f09b4_외계인"/>`-->
+<!--      </script>-->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        async function uploadToServer(formData){
+            const response = await axios({
+                method : 'post',
+                url : '/upload',
+                data : formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            return response.data;
+        }
+
+        $('.btn').click(function (){
+                const formData = new FormData();
+
+              const fileData = document.querySelector("input[name='files']")
+              console.log("들어옴")
+              const files = fileData.files;
+              for (let i = 0; i < files.length; i++) {
+                    formData.append("files", files[i]);
+              }
+
+            uploadToServer(formData)
+                .then(result => {
+                    console.log(result)
+
+                    for(const file of result){
+                        console.log(file.link)
+                        const imgSrc = "/view?fileName="+file.link
+                        $('.img').append(`<img src='${imgSrc}' width="200" height="140" data-src='${file.link}'/>`)
+                    }
+                }).catch(e => {
+
+            })
+        })
+
+        $('.product-btn').click(function (e){
+            e.preventDefault()
+            e.stopPropagation()
+
+            const fileName = $('.img').children('img')
+            console.log(fileName[0].getAttribute("data-src"))
+            for(const name of fileName){
+                $('.form').append(`<input type="hidden" name="fileNames" value="${name.getAttribute("data-src")}"/>`)
+            }
+
+            $('.form').submit()
+        })
+
+
+    </script>
+</body>
+</html>

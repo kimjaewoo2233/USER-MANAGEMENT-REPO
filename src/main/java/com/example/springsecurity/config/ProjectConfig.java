@@ -57,7 +57,10 @@ public class ProjectConfig  {
         log.info("--------------------security-----------------------");
         http.authorizeHttpRequests(auth -> {
                auth
-                       .mvcMatchers(HttpMethod.POST,"/member/register").permitAll();
+                       .mvcMatchers(HttpMethod.POST,"/member/register").permitAll()
+                       .mvcMatchers(HttpMethod.POST,"/upload").permitAll()
+                       .mvcMatchers(HttpMethod.GET,"/view").permitAll()
+                       .mvcMatchers(HttpMethod.GET,"/index").permitAll();
         }).formLogin().and()
                 .csrf().disable()
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
