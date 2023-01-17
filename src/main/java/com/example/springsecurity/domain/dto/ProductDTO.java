@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ProductDTO {
-
+    private String productName;
     private List<String> fileNames;
 }

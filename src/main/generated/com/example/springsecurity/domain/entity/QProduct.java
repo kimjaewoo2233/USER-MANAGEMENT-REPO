@@ -20,9 +20,11 @@ public class QProduct extends EntityPathBase<Product> {
 
     public static final QProduct product = new QProduct("product");
 
-    public final SetPath<BoardImage, QBoardImage> boardImageSet = this.<BoardImage, QBoardImage>createSet("boardImageSet", BoardImage.class, QBoardImage.class, PathInits.DIRECT2);
-
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final SetPath<ProductImage, QProductImage> productImageSet = this.<ProductImage, QProductImage>createSet("productImageSet", ProductImage.class, QProductImage.class, PathInits.DIRECT2);
+
+    public final StringPath productName = createString("productName");
 
     public QProduct(String variable) {
         super(Product.class, forVariable(variable));

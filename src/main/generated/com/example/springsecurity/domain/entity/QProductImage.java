@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QBoardImage is a Querydsl query type for BoardImage
+ * QProductImage is a Querydsl query type for ProductImage
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QBoardImage extends EntityPathBase<BoardImage> {
+public class QProductImage extends EntityPathBase<ProductImage> {
 
-    private static final long serialVersionUID = -735123962L;
+    private static final long serialVersionUID = 1051798877L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QBoardImage boardImage = new QBoardImage("boardImage");
+    public static final QProductImage productImage = new QProductImage("productImage");
 
     public final StringPath fileName = createString("fileName");
 
@@ -30,23 +30,23 @@ public class QBoardImage extends EntityPathBase<BoardImage> {
 
     public final StringPath uuid = createString("uuid");
 
-    public QBoardImage(String variable) {
-        this(BoardImage.class, forVariable(variable), INITS);
+    public QProductImage(String variable) {
+        this(ProductImage.class, forVariable(variable), INITS);
     }
 
-    public QBoardImage(Path<? extends BoardImage> path) {
+    public QProductImage(Path<? extends ProductImage> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QBoardImage(PathMetadata metadata) {
+    public QProductImage(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QBoardImage(PathMetadata metadata, PathInits inits) {
-        this(BoardImage.class, metadata, inits);
+    public QProductImage(PathMetadata metadata, PathInits inits) {
+        this(ProductImage.class, metadata, inits);
     }
 
-    public QBoardImage(Class<? extends BoardImage> type, PathMetadata metadata, PathInits inits) {
+    public QProductImage(Class<? extends ProductImage> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.product = inits.isInitialized("product") ? new QProduct(forProperty("product")) : null;
     }

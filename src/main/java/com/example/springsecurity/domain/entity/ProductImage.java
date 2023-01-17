@@ -12,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "board_image")
-public class BoardImage implements Comparable<BoardImage> {
+@Table(name = "product_image")
+public class ProductImage implements Comparable<ProductImage> {
 
     @Id
     private String uuid;
@@ -29,8 +29,8 @@ public class BoardImage implements Comparable<BoardImage> {
 
 
     @Override   //OneToMany순서에 맞게 정렬함
-    public int compareTo(BoardImage boardImage){
-            return  this.ord - boardImage.ord;
+    public int compareTo(ProductImage productImage){
+            return  this.ord - productImage.ord;
     }
     public void changeProduct(Product product){
         this.product = product;
