@@ -12,7 +12,7 @@ public interface MemberFeatRepository {
 
     public Optional<MemberDTO> memberInfo(String username);
 
-
+    public Optional<Member> socialMemberInfo(String username);
 
 
 }

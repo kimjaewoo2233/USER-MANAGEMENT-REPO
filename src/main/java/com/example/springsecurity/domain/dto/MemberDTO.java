@@ -7,16 +7,18 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @ToString
-public class MemberDTO extends User {
+public class MemberDTO extends User implements OAuth2User {
     private String username;
 
     private String password;
@@ -25,19 +27,27 @@ public class MemberDTO extends User {
 
     private Gender gender;
 
-    private Set<MemberRole> memberRoleSet = new HashSet<>();
+    private boolean social;
+
+    private Map<String, Object> props;  //소셜로그인 정보를 처리하는 멤버변수수
+
+
+
+
+   private Set<MemberRole> memberRoleSet = new HashSet<>();
     public MemberDTO(String username,
                      String password,
                      Collection<? extends GrantedAuthority> authorities,
                      Set<MemberRole> roles,
                      String nickName,
-                     Gender gender) {
+                     Gender gender,boolean social) {
         super(username, password, authorities);
         this.username = username;
         this.password = password;
         this.memberRoleSet.addAll(roles);
         this.nickName = nickName;
         this.gender = gender;
+        this.social = false;
     }
 
     public static Member toEntity(MemberDTO dto){
@@ -47,6 +57,7 @@ public class MemberDTO extends User {
                     .password(dto.getPassword())
                     .nickName(dto.getNickName())
                     .gender(dto.getGender())
+                    .social(dto.isSocial())
                     .build();
     }
     public static MemberDTO toDTO(Member entity){
@@ -67,8 +78,17 @@ public class MemberDTO extends User {
                         .map(role -> role.getMemberRole())
                         .collect(Collectors.toUnmodifiableSet()),
                 entity.getNickName(),
-                entity.getGender());
+                entity.getGender(), entity.isSocial());
     }
 
 
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

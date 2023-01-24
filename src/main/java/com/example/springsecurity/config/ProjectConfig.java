@@ -5,6 +5,7 @@ import com.example.springsecurity.security.MemoryUserDetailsService;
 import com.example.springsecurity.security.filter.LoginFilter;
 import com.example.springsecurity.security.handler.LoginFailureHandler;
 import com.example.springsecurity.security.handler.LoginSuccessHandler;
+import com.example.springsecurity.security.handler.OAuth2SuccessHandler;
 import com.example.springsecurity.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,7 @@ public class ProjectConfig  {
 
         LoginSuccessHandler successHandler = new LoginSuccessHandler(jwtUtil);
         LoginFailureHandler failureHandler = new LoginFailureHandler();
+        OAuth2SuccessHandler oAuth2SuccessHandler = new OAuth2SuccessHandler(passwordEncoder());
 
         LoginFilter loginFilter = new LoginFilter(authenticationManager);
         loginFilter.setAuthenticationSuccessHandler(successHandler);
@@ -61,9 +63,10 @@ public class ProjectConfig  {
                        .mvcMatchers(HttpMethod.POST,"/upload").permitAll()
                        .mvcMatchers(HttpMethod.GET,"/view").permitAll()
                        .mvcMatchers(HttpMethod.GET,"/index").permitAll();
-        }).formLogin().and()
+        })//.formLogin().and()
                 .csrf().disable()
-                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login().loginPage("/login").successHandler(oAuth2SuccessHandler);
         return http.build();
     }//http://localhost:8080/login?logout 로그아웃주소 csrf 비활성화로 인해 GET으로도 로그아웃이 가능해짐
 

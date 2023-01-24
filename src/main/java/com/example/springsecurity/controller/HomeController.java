@@ -20,6 +20,17 @@ public class HomeController {
             return "index";
         }
 
+        @GetMapping("/login")
+        public String login(){
+                return "login";
+        }
+
+        @GetMapping("/member/modify")
+        public String memberModify(){
+            return "member-modify";
+        }
+
+
         @PostMapping("/save")
         public String post(ProductDTO dto){
             productService.saveProduct(dto);

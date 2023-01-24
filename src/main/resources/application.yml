@@ -39,3 +39,24 @@ spring:
       max-active: 8
     port: 6379
     host: 127.0.0.1
+
+---
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            user-name-attribute: id
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+        registration:
+          kakao:
+            client-name: kakao
+            authorization-grant-type: authorization_code
+            redirect_uri: http://localhost:8080/login/oauth2/code/kakao
+            client-id: f9b458c1d685a9638dd928c2be0f6c63
+            client-secret: JRngoBD1mMgLHHtem8TtHcXgVBBETLiH
+            client-authentication-method: POST
+            scope: profile_nickname,account_email

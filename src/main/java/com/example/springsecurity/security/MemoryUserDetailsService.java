@@ -26,13 +26,12 @@ import java.util.stream.Collectors;
 public class MemoryUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    private final MemberFeatRepository memberFeatRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
             log.info("------------------UserDetailsService");
 
-        return memberFeatRepository.memberInfo(username).orElseThrow(() ->
+        return memberRepository.memberInfo(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not Found"));
     }
 }

@@ -28,6 +28,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
+    public final BooleanPath social = createBoolean("social");
+
     public final StringPath username = createString("username");
 
     public QMember(String variable) {

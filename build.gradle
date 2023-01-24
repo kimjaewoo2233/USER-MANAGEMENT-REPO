@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.auth0:java-jwt:3.16.0'
     implementation 'net.coobird:thumbnailator:0.4.16'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 
     runtimeOnly 'com.h2database:h2'

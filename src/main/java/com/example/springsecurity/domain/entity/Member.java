@@ -27,6 +27,8 @@ public class Member {
         @Enumerated(EnumType.STRING)
         private Gender gender;
 
+        private boolean social;
+
         @Builder.Default
         @OneToMany(fetch = FetchType.LAZY
                 ,mappedBy = "member"
